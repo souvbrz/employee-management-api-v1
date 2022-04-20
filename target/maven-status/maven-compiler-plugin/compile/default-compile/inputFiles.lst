@@ -1,8 +1,0 @@
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/resource/EmployeeResource.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/model/Employee.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/exception/GlobalExceptionHandler.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/service/EmployeeService.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/service/EmployeeServiceImpl.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/exception/EmployeeNotFoundException.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/App.java
-/Users/svick/personal/employee-management-api-v1/src/main/java/in/svick/brz/employee/repository/EmployeeRepository.java
