@@ -21,7 +21,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByFirstNameContaining(String firstName);
 
     @Query("FROM Employee WHERE firstName = :firstName AND lastName = :lastName AND age > :age AND location = :location")
-    Employee getEmployeesByCondition(String firstName, String lastName, int age, String location);
+    List<Employee> getEmployeesByCondition(String firstName, String lastName, int age, String location);
 
     @Transactional
     @Modifying

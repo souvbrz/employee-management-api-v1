@@ -43,8 +43,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployee(Employee e) {
-        return employeeRepository.save(e);
+    public Employee updateEmployee(Long id, Employee e) {
+        if(employeeRepository.findById(id).isPresent()){
+            return employeeRepository.save(e);
+        }
+        throw new EmployeeNotFoundException("Employee not found for id : " + id);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeesByCondition(String firstName, String lastName, int age, String location) {
+    public List<Employee> getEmployeesByCondition(String firstName, String lastName, int age, String location) {
         return employeeRepository.getEmployeesByCondition(firstName, lastName, age, location);
     }
 

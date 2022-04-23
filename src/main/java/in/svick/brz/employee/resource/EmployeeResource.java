@@ -27,14 +27,15 @@ public class EmployeeResource {
     }
 
     @PostMapping(value = "/employees")
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee) {
         return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/employees/{id}")
-    public ResponseEntity<Employee> updateEmployeeById(@PathVariable(name = "id") Long id, @Valid @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployeeById(@PathVariable(name = "id") Long id,
+                                                       @Valid @RequestBody Employee employee) {
         employee.setId(id);
-        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.updateEmployee(id, employee), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/employees")
@@ -54,7 +55,8 @@ public class EmployeeResource {
     }
 
     @GetMapping(value = "/employees/filter/name")
-    public ResponseEntity<List<Employee>> getEmployeesByNames(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {
+    public ResponseEntity<List<Employee>> getEmployeesByNames(@RequestParam(name = "firstName") String firstName,
+                                                              @RequestParam(name = "lastName") String lastName) {
         return new ResponseEntity<>(employeeService.getEmployeesByFirstNameAndLastName(firstName, lastName), HttpStatus.OK);
     }
 
@@ -64,7 +66,7 @@ public class EmployeeResource {
     }
 
     @GetMapping(value = "/employees/filter/condition")
-    public ResponseEntity<Employee> getEmployeesByCondition(@RequestParam(name = "firstName") String firstName,
+    public ResponseEntity<List<Employee>> getEmployeesByCondition(@RequestParam(name = "firstName") String firstName,
                                                             @RequestParam(name = "lastName") String lastName,
                                                             @RequestParam(name = "age") int age,
                                                             @RequestParam(name = "location") String location) {
@@ -72,7 +74,8 @@ public class EmployeeResource {
     }
 
     @DeleteMapping(value = "/employees/delete/{firstName}/{lastName}")
-    public ResponseEntity<Integer> getEmployeesByKeyword(@PathVariable(name = "firstName") String firstName, @PathVariable(name = "lastName") String lastName) {
+    public ResponseEntity<Integer> deleteEmployeesByNames(@PathVariable(name = "firstName") String firstName,
+                                                         @PathVariable(name = "lastName") String lastName) {
         return new ResponseEntity<>(employeeService.deleteEmployeesByName(firstName, lastName), HttpStatus.OK);
     }
 }

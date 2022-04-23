@@ -14,7 +14,7 @@ public interface EmployeeService {
 
     void deleteEmployee(Long id);
 
-    Employee updateEmployee(Employee e);
+    Employee updateEmployee(Long id, Employee e);
 
     List<Employee> getEmployeesByDepartment(String department);
 
@@ -24,7 +24,7 @@ public interface EmployeeService {
 
     List<Employee> getEmployeesByKeyword(String firstName);
 
-    Employee getEmployeesByCondition(String firstName, String lastName, int age, String location);
+    List<Employee> getEmployeesByCondition(String firstName, String lastName, int age, String location);
 
     Integer deleteEmployeesByName(String firstName, String lastName);
 }
