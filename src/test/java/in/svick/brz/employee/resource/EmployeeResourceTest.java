@@ -128,9 +128,13 @@ public class EmployeeResourceTest {
 
     }
 
-/*    @Test
+    @Test
+    @DisplayName("Should update an Employee When making PUT request to endpoint - /api/v1/employees/1 with JSON payload")
     void updateEmployeeById() throws Exception {
-        Employee e = buildUpdateMockEmployee();
+
+        Employee e = employeeList.get(0);
+        e.setLocation("Norway");
+        e.setLastUpdatedTimestamp(new Date());
 
         String jsonString = new ObjectMapper().writeValueAsString(e);
 
@@ -141,16 +145,8 @@ public class EmployeeResourceTest {
         this.mockMvc.perform(put("/employees/"+e.getId()).contentType(MediaType.APPLICATION_JSON)
                         .content(jsonString))
                 .andDo(print())
-                .andExpect(status().isOk())
-                *//*.andExpect(content().contentType(MediaType.APPLICATION_JSON))*//*
-                .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.firstName").value("First"))
-                .andExpect(jsonPath("$.lastName").value("SurName"))
-                .andExpect(jsonPath("$.age").value(25))
-                .andExpect(jsonPath("$.location").value("Norway"))
-                .andExpect(jsonPath("$.email").value("employee1@email.com"))
-                .andExpect(jsonPath("$.department").value("IT"));
-    }*/
+                .andExpect(status().isOk());
+    }
 
     @Test
     @DisplayName("Should delete an Employee When making DELETE request to endpoint - /api/v1/employees?id=1")
