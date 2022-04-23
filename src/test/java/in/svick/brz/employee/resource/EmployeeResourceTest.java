@@ -132,18 +132,14 @@ public class EmployeeResourceTest {
     @DisplayName("Should update an Employee When making PUT request to endpoint - /api/v1/employees/1 with JSON payload")
     void updateEmployeeById() throws Exception {
 
-        Employee e = employeeList.get(0);
-        e.setLocation("Norway");
-        e.setLastUpdatedTimestamp(new Date());
-
-        String jsonString = new ObjectMapper().writeValueAsString(e);
+        Employee e = new Employee(1L, "First", "Surname", 27, "Norway", "employee1@email.com", "IT", employeeList.get(0).getCreatedTimestamp(), new Date());
 
         Mockito.when(employeeService.saveEmployee(any())).thenReturn(e);
         Mockito.when(employeeRepository.findById(any())).thenReturn(Optional.of(e));
         Mockito.when(employeeRepository.save(any())).thenReturn(e);
 
         this.mockMvc.perform(put("/employees/"+e.getId()).contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString))
+                        .content(new ObjectMapper().writeValueAsString(e)))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -208,20 +204,6 @@ public class EmployeeResourceTest {
                 .andExpect(jsonPath("$[0].id").value("1"))
                 .andExpect(jsonPath("$[0].firstName").value("First"))
                 .andExpect(jsonPath("$[0].lastName").value("Surname"));
-    }
-
-    @Test
-    @DisplayName("Should return a blank list When making GET request to endpoint - /api/v1/employees/filter/keyword?firstName=Sou")
-    void getEmployeesByKeywordTest() throws Exception {
-
-        Mockito.when(employeeService.getEmployeesByKeyword(any())).thenReturn(new ArrayList<>());
-        Mockito.when(employeeRepository.findByFirstNameContaining(any())).thenReturn(new ArrayList<>());
-
-        this.mockMvc.perform(get("/employees/filter/keyword").param("firstName", "Sou"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json("[]"));
     }
 
     @Test

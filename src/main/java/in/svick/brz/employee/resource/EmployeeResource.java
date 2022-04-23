@@ -34,7 +34,6 @@ public class EmployeeResource {
     @PutMapping(value = "/employees/{id}")
     public ResponseEntity<Employee> updateEmployeeById(@PathVariable(name = "id") Long id,
                                                        @Valid @RequestBody Employee employee) {
-        employee.setId(id);
         return new ResponseEntity<>(employeeService.updateEmployee(id, employee), HttpStatus.OK);
     }
 
@@ -58,11 +57,6 @@ public class EmployeeResource {
     public ResponseEntity<List<Employee>> getEmployeesByNames(@RequestParam(name = "firstName") String firstName,
                                                               @RequestParam(name = "lastName") String lastName) {
         return new ResponseEntity<>(employeeService.getEmployeesByFirstNameAndLastName(firstName, lastName), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/employees/filter/keyword")
-    public ResponseEntity<List<Employee>> getEmployeesByKeyword(@RequestParam(name = "firstName") String firstName) {
-        return new ResponseEntity<>(employeeService.getEmployeesByKeyword(firstName), HttpStatus.OK);
     }
 
     @GetMapping(value = "/employees/filter/condition")

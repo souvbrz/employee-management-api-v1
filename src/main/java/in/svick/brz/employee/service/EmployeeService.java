@@ -22,8 +22,6 @@ public interface EmployeeService {
 
     List<Employee> getEmployeesByFirstNameAndLastName(String firstName, String lastName);
 
-    List<Employee> getEmployeesByKeyword(String firstName);
-
     List<Employee> getEmployeesByCondition(String firstName, String lastName, int age, String location);
 
     Integer deleteEmployeesByName(String firstName, String lastName);
